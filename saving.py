@@ -174,6 +174,26 @@ class Breakthrough():
         except:
             print("File not loaded")
 
+    def __LoadLocks(self):
+        FileName = "locks.txt"
+        self.__Locks = []
+        try:
+            with open(FileName) as f:
+                LineFromFile = f.readline().rstrip()
+                while LineFromFile != "":
+                    Challenges = LineFromFile.split(";")
+                    LockFromFile = Lock()
+                    for C in Challenges:
+                        Conditions = C.split(",")
+                        LockFromFile.AddChallenge(Conditions)
+                    self.__Locks.append(LockFromFile)
+                    LineFromFile = f.readline().rstrip()
+        except:
+            print("File not loaded")
+
+    def __GetRandomLock(self):
+        return self.__Locks[random.randint(0, len(self.__Locks) - 1)]
+
     def __GetRandomLock(self):
         return self.__Locks[random.randint(0, len(self.__Locks) - 1)]
 
